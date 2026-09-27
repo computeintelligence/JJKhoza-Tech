@@ -19,6 +19,19 @@ import {
 import { Link } from 'wouter';
 import { projects } from '@/data/projects';
 
+const heroNodes = [
+  { icon: Atom, label: 'Quantum Lab', className: 'left-[2%] top-[10%] md:left-[-4%]' },
+  { icon: Sparkles, label: 'AI Systems', className: 'right-[0%] top-[6%] md:right-[-6%]' },
+  { icon: ShieldCheck, label: 'Cryptology', className: 'left-[0%] bottom-[10%] md:left-[-8%]' },
+  { icon: Network, label: 'Algorithms', className: 'right-[2%] bottom-[6%] md:right-[-4%]' },
+];
+
+const heroCapabilities = [
+  { icon: Code2, title: 'Software Engineering', desc: 'Robust digital infrastructure that stays legible as it scales.' },
+  { icon: Network, title: 'Algorithms Development', desc: 'Computational methods where performance is a strategic edge.' },
+  { icon: Cpu, title: 'Quantum Computing', desc: 'Research spanning dependable machines and quantum states.' },
+];
+
 export default function Home() {
   return (
     <div className="w-full">
@@ -176,27 +189,24 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
 
-      {/* Signal Strip */}
-      <section className="relative z-20 border-y border-cyan/25 bg-gradient-to-r from-cyan via-[#92efe7] to-violet py-10 text-ink">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-ink/20">
-          <Reveal delay={0} className="md:px-4 first:pl-0">
-            <div className="font-mono text-[10px] uppercase tracking-widest mb-2 opacity-80">Operating at</div>
-            <div className="font-display text-xl font-medium">The edge of the possible</div>
-          </Reveal>
-          <Reveal delay={100} className="md:px-4 pt-4 md:pt-0">
-            <div className="font-mono text-[10px] uppercase tracking-widest mb-2 opacity-80">Core posture</div>
-            <div className="font-display text-xl font-medium">Research → reality</div>
-          </Reveal>
-          <Reveal delay={200} className="md:px-4 pt-4 md:pt-0">
-            <div className="font-mono text-[10px] uppercase tracking-widest mb-2 opacity-80">Perspective</div>
-            <div className="font-display text-xl font-medium">African, global</div>
-          </Reveal>
-          <Reveal delay={300} className="md:px-4 pt-4 md:pt-0">
-            <div className="font-mono text-[10px] uppercase tracking-widest mb-2 opacity-80">Status</div>
-            <div className="font-display text-xl font-medium">Building forward</div>
-          </Reveal>
+        {/* Compact capability row */}
+        <div className="relative z-10 mx-auto mt-16 w-full max-w-7xl px-6 md:mt-20">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+            {heroCapabilities.map((cap, i) => (
+              <Reveal key={cap.title} delay={i * 100}>
+                <div className="flex h-full items-start gap-4 rounded-2xl border border-navy/10 bg-white/80 p-5 shadow-[0_16px_40px_rgba(8,24,44,0.06)] backdrop-blur-sm">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-navy text-cyan">
+                    <cap.icon size={18} />
+                  </div>
+                  <div>
+                    <div className="font-display text-base font-medium text-navy">{cap.title}</div>
+                    <p className="mt-1 text-sm leading-relaxed text-navy/60">{cap.desc}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
