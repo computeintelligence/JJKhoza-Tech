@@ -1,74 +1,133 @@
 import { Reveal } from '@/components/ui/Reveal';
-import { SignalField } from '@/components/ui/SignalField';
-import { ArrowRight, ArrowUpRight, ScanLine, Code2, Network, Cpu, Play } from 'lucide-react';
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Code2,
+  Network,
+  Cpu,
+  Play,
+  Atom,
+  ShieldCheck,
+  Sparkles,
+  Activity,
+} from 'lucide-react';
 import { Link } from 'wouter';
 import { projects } from '@/data/projects';
+
+const heroNodes = [
+  { icon: Atom, label: 'Quantum Lab', className: 'left-[2%] top-[10%] md:left-[-4%]' },
+  { icon: Sparkles, label: 'AI Systems', className: 'right-[0%] top-[6%] md:right-[-6%]' },
+  { icon: ShieldCheck, label: 'Cryptology', className: 'left-[0%] bottom-[10%] md:left-[-8%]' },
+  { icon: Network, label: 'Algorithms', className: 'right-[2%] bottom-[6%] md:right-[-4%]' },
+];
+
+const heroCapabilities = [
+  { icon: Code2, title: 'Software Engineering', desc: 'Robust digital infrastructure that stays legible as it scales.' },
+  { icon: Network, title: 'Algorithms Development', desc: 'Computational methods where performance is a strategic edge.' },
+  { icon: Cpu, title: 'Quantum Computing', desc: 'Research spanning dependable machines and quantum states.' },
+];
 
 export default function Home() {
   return (
     <div className="w-full">
       {/* Hero */}
-      <section className="relative flex min-h-[90vh] items-center overflow-hidden pb-28 pt-16 md:pb-32 md:pt-20">
-        <div className="absolute inset-0 grid-bg opacity-30"></div>
-        <div className="holo-grid absolute inset-x-0 top-0 h-[70%] opacity-45"></div>
-        <div className="aurora absolute -right-32 top-0 h-[48rem] w-[48rem] rounded-full opacity-70"></div>
-        
-        <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[1.1fr_.9fr]">
-          <div className="max-w-4xl">
+      <section className="relative overflow-hidden bg-paper pb-20 pt-20 text-navy md:pb-28 md:pt-24">
+        <div className="pointer-events-none absolute inset-0 opacity-[0.35]" style={{ backgroundImage: 'radial-gradient(circle at 18% 20%, rgba(45,158,160,0.10), transparent 42%), radial-gradient(circle at 85% 15%, rgba(145,132,255,0.10), transparent 40%)' }} />
+
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-16 px-6 lg:grid-cols-[1.05fr_.95fr]">
+          <div className="max-w-2xl">
             <Reveal>
-              <div className="flex items-center gap-3 text-cyan mb-8 font-mono text-sm uppercase tracking-widest">
-                <ScanLine size={16} />
-                <span>Est. 2016 / Johannesburg · Global</span>
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-navy/10 bg-white/70 px-4 py-1.5 font-mono text-[11px] uppercase tracking-widest text-navy/60 shadow-sm">
+                <span className="h-1.5 w-1.5 rounded-full bg-cyan-dark" />
+                Est. 2016 / Johannesburg · Global
               </div>
             </Reveal>
             <Reveal delay={100}>
-              <h1 className="mb-8 font-display text-5xl font-medium leading-[1.04] tracking-tight md:text-7xl lg:text-[5.6rem]">
-                We build the <span className="text-glow bg-gradient-to-r from-cyan via-paper to-violet bg-clip-text font-normal italic text-transparent">thinking</span> layer of tomorrow.
+              <h1 className="mb-6 font-display text-4xl font-medium leading-[1.08] tracking-tight text-navy md:text-6xl">
+                JJ Khoza Tech: <span className="text-cyan-dark">Intelligence</span>, Engineered for Impact.
               </h1>
             </Reveal>
-            <Reveal delay={200}>
-              <p className="text-lg md:text-xl text-paper/70 max-w-2xl leading-relaxed mb-12">
-                JJ Khoza Tech is a research-minded technology development company working where the Fourth Industrial Revolution meets the Second Quantum Revolution.
+            <Reveal delay={180}>
+              <p className="mb-10 max-w-xl text-lg leading-relaxed text-navy/65 md:text-xl">
+                Research-driven software, algorithms and quantum systems — built at the edge of the possible.
               </p>
             </Reveal>
-            <Reveal delay={300}>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-                <Link href="/capabilities" className="scan-line flex items-center gap-2 rounded-sm border border-cyan bg-cyan px-6 py-4 font-mono text-sm uppercase tracking-widest text-ink shadow-[0_0_32px_rgba(114,238,228,0.2)] transition-all hover:-translate-y-1 hover:shadow-[0_0_42px_rgba(114,238,228,0.3)]" data-testid="link-home-capabilities">
-                  Explore the architecture <ArrowRight size={16} />
+            <Reveal delay={260}>
+              <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+                <Link href="/capabilities" className="flex items-center gap-2 rounded-full bg-navy px-6 py-3.5 font-mono text-xs uppercase tracking-widest text-paper shadow-[0_16px_40px_rgba(8,24,44,0.25)] transition-all hover:-translate-y-0.5 hover:bg-navy-soft" data-testid="link-home-capabilities">
+                  Explore the architecture <ArrowRight size={15} />
                 </Link>
-                <Link href="/research" className="flex items-center gap-2 text-paper/80 hover:text-cyan px-6 py-4 font-mono text-sm uppercase tracking-widest transition-colors" data-testid="link-home-research">
-                  Read our research
+                <Link href="/research" className="flex items-center gap-2 px-2 py-3.5 font-mono text-xs uppercase tracking-widest text-navy/70 transition-colors hover:text-cyan-dark" data-testid="link-home-research">
+                  Read our research <ArrowUpRight size={15} />
                 </Link>
               </div>
             </Reveal>
           </div>
-          <Reveal delay={220} className="mx-auto hidden w-full max-w-[27rem] lg:block">
-            <div className="signal-panel signal-corners rounded-[2rem] p-5">
-              <SignalField label="Core signal / Johannesburg" />
+
+          {/* Floating system panel */}
+          <Reveal delay={220} className="relative mx-auto hidden w-full max-w-[26rem] lg:block">
+            <div className="relative aspect-square w-full">
+              <svg viewBox="0 0 400 400" className="absolute inset-0 h-full w-full" aria-hidden="true">
+                <path d="M70,80 C130,110 160,150 185,185" stroke="#2d9ea0" strokeWidth="1.5" strokeDasharray="3 5" fill="none" opacity="0.45" />
+                <path d="M330,70 C280,105 250,145 220,180" stroke="#9184ff" strokeWidth="1.5" strokeDasharray="3 5" fill="none" opacity="0.45" />
+                <path d="M60,335 C120,300 155,265 185,225" stroke="#e5ae62" strokeWidth="1.5" strokeDasharray="3 5" fill="none" opacity="0.5" />
+                <path d="M335,330 C280,295 250,260 220,222" stroke="#2d9ea0" strokeWidth="1.5" strokeDasharray="3 5" fill="none" opacity="0.45" />
+              </svg>
+
+              {heroNodes.map((node) => (
+                <div key={node.label} className={`absolute z-10 flex items-center gap-2 rounded-full border border-navy/10 bg-white/90 px-3 py-2 shadow-[0_10px_30px_rgba(8,24,44,0.1)] backdrop-blur-sm ${node.className}`}>
+                  <node.icon size={14} className="text-cyan-dark" />
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-navy/70">{node.label}</span>
+                </div>
+              ))}
+
+              <div className="absolute left-1/2 top-1/2 w-64 -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-navy/10 bg-white p-5 shadow-[0_30px_70px_rgba(8,24,44,0.18)]">
+                <div className="mb-4 flex items-center justify-between border-b border-navy/10 pb-3">
+                  <span className="font-display text-sm font-semibold text-navy">Systems Online</span>
+                  <span className="flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-widest text-cyan-dark">
+                    <Activity size={11} /> Live
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-lg bg-paper-deep p-3">
+                    <div className="font-mono text-[9px] uppercase tracking-widest text-navy/45">Compute</div>
+                    <div className="mt-1 font-display text-lg font-medium text-navy">Active</div>
+                  </div>
+                  <div className="rounded-lg bg-paper-deep p-3">
+                    <div className="font-mono text-[9px] uppercase tracking-widest text-navy/45">Uptime</div>
+                    <div className="mt-1 font-display text-lg font-medium text-navy">99.98%</div>
+                  </div>
+                  <div className="rounded-lg bg-paper-deep p-3">
+                    <div className="font-mono text-[9px] uppercase tracking-widest text-navy/45">Research</div>
+                    <div className="mt-1 font-display text-lg font-medium text-navy">7 tracks</div>
+                  </div>
+                  <div className="rounded-lg bg-paper-deep p-3">
+                    <div className="font-mono text-[9px] uppercase tracking-widest text-navy/45">Projects</div>
+                    <div className="mt-1 font-display text-lg font-medium text-navy">15 public</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </Reveal>
         </div>
-      </section>
 
-      {/* Signal Strip */}
-      <section className="relative z-20 border-y border-cyan/25 bg-gradient-to-r from-cyan via-[#92efe7] to-violet py-10 text-ink">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-ink/20">
-          <Reveal delay={0} className="md:px-4 first:pl-0">
-            <div className="font-mono text-[10px] uppercase tracking-widest mb-2 opacity-80">Operating at</div>
-            <div className="font-display text-xl font-medium">The edge of the possible</div>
-          </Reveal>
-          <Reveal delay={100} className="md:px-4 pt-4 md:pt-0">
-            <div className="font-mono text-[10px] uppercase tracking-widest mb-2 opacity-80">Core posture</div>
-            <div className="font-display text-xl font-medium">Research → reality</div>
-          </Reveal>
-          <Reveal delay={200} className="md:px-4 pt-4 md:pt-0">
-            <div className="font-mono text-[10px] uppercase tracking-widest mb-2 opacity-80">Perspective</div>
-            <div className="font-display text-xl font-medium">African, global</div>
-          </Reveal>
-          <Reveal delay={300} className="md:px-4 pt-4 md:pt-0">
-            <div className="font-mono text-[10px] uppercase tracking-widest mb-2 opacity-80">Status</div>
-            <div className="font-display text-xl font-medium">Building forward</div>
-          </Reveal>
+        {/* Compact capability row */}
+        <div className="relative z-10 mx-auto mt-16 w-full max-w-7xl px-6 md:mt-20">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+            {heroCapabilities.map((cap, i) => (
+              <Reveal key={cap.title} delay={i * 100}>
+                <div className="flex h-full items-start gap-4 rounded-2xl border border-navy/10 bg-white/80 p-5 shadow-[0_16px_40px_rgba(8,24,44,0.06)] backdrop-blur-sm">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-navy text-cyan">
+                    <cap.icon size={18} />
+                  </div>
+                  <div>
+                    <div className="font-display text-base font-medium text-navy">{cap.title}</div>
+                    <p className="mt-1 text-sm leading-relaxed text-navy/60">{cap.desc}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
