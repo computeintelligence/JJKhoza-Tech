@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "JJ Khoza Tech"
+description = "A polished, responsive company website for JJ Khoza Tech, a digital civilization architecture company working across quantum and classical computing, AI, algorithms, mathematical technology ecosystems, HPC, and cryptology."
+version = "1.0.0"
+id = "artifacts/jj-khoza-tech"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20039
+
+[services.development]
+run = "pnpm --filter @workspace/jj-khoza-tech run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/jj-khoza-tech", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/jj-khoza-tech/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20039"
+BASE_PATH = "/"
