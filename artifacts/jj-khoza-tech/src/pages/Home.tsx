@@ -19,19 +19,6 @@ import {
 import { Link } from 'wouter';
 import { projects } from '@/data/projects';
 
-const heroNodes = [
-  { icon: Atom, label: 'Quantum Lab', className: 'left-[2%] top-[10%] md:left-[-4%]' },
-  { icon: Sparkles, label: 'AI Systems', className: 'right-[0%] top-[6%] md:right-[-6%]' },
-  { icon: ShieldCheck, label: 'Cryptology', className: 'left-[0%] bottom-[10%] md:left-[-8%]' },
-  { icon: Network, label: 'Algorithms', className: 'right-[2%] bottom-[6%] md:right-[-4%]' },
-];
-
-const heroCapabilities = [
-  { icon: Code2, title: 'Software Engineering', desc: 'Robust digital infrastructure that stays legible as it scales.' },
-  { icon: Network, title: 'Algorithms Development', desc: 'Computational methods where performance is a strategic edge.' },
-  { icon: Cpu, title: 'Quantum Computing', desc: 'Research spanning dependable machines and quantum states.' },
-];
-
 export default function Home() {
   return (
     <div className="w-full">
@@ -190,24 +177,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Compact capability row */}
-        <div className="relative z-10 mx-auto mt-16 w-full max-w-7xl px-6 md:mt-20">
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
-            {heroCapabilities.map((cap, i) => (
-              <Reveal key={cap.title} delay={i * 100}>
-                <div className="flex h-full items-start gap-4 rounded-2xl border border-navy/10 bg-white/80 p-5 shadow-[0_16px_40px_rgba(8,24,44,0.06)] backdrop-blur-sm">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-navy text-cyan">
-                    <cap.icon size={18} />
-                  </div>
-                  <div>
-                    <div className="font-display text-base font-medium text-navy">{cap.title}</div>
-                    <p className="mt-1 text-sm leading-relaxed text-navy/60">{cap.desc}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* Intro / Premise */}
