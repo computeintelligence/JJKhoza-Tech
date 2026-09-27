@@ -39,6 +39,7 @@ const pageMeta: Record<string, { title: string; description: string }> = {
 export function Shell({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [location] = useLocation();
+  const isHome = location === '/';
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const menuDialogRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLElement>(null);
@@ -176,8 +177,8 @@ export function Shell({ children }: { children: ReactNode }) {
   ];
 
   return (
-    <div className="min-h-[100dvh] flex flex-col relative overflow-hidden bg-ink text-paper selection:bg-cyan selection:text-ink">
-      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
+    <div className={`min-h-[100dvh] flex flex-col relative overflow-hidden selection:bg-cyan selection:text-ink ${isHome ? 'bg-white text-[#10141a]' : 'bg-ink text-paper'}`}>
+      <div className={`pointer-events-none fixed inset-0 z-0 overflow-hidden ${isHome ? 'hidden' : ''}`} aria-hidden="true">
         <div className="aurora absolute -right-48 -top-36 h-[44rem] w-[44rem] rounded-full opacity-60" />
         <div className="absolute left-[8%] top-[42%] h-1 w-1 rounded-full bg-violet shadow-[0_0_24px_8px_rgba(145,132,255,0.45)]" />
         <div className="absolute right-[18%] top-[26%] h-1.5 w-1.5 rounded-full bg-cyan shadow-[0_0_20px_6px_rgba(114,238,228,0.42)]" />
@@ -197,20 +198,20 @@ export function Shell({ children }: { children: ReactNode }) {
         Skip to content
       </a>
 
-      <header className="fixed top-0 inset-x-0 z-40 border-b border-cyan/[0.08] bg-ink/70 backdrop-blur-xl transition-all duration-300" data-testid="header-site">
+      <header className={`fixed top-0 inset-x-0 z-40 border-b backdrop-blur-xl transition-all duration-300 ${isHome ? 'border-[#10141a]/[0.08] bg-white/65' : 'border-cyan/[0.08] bg-ink/70'}`} data-testid="header-site">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-4 group" data-testid="link-brand-home">
             <div className="relative">
-              <img 
-                src="/assets/jj-khoza-emblem.jpg" 
-                alt="JJ Khoza Tech Emblem" 
-                 className="h-10 w-10 rounded-full border border-cyan/40 object-cover shadow-[0_0_22px_rgba(114,238,228,0.12)] transition-colors group-hover:border-cyan" 
+               <img
+               src="/assets/jj-khoza-emblem.jpg"
+               alt="JJ Khoza Tech Emblem"
+                className={`h-10 w-10 rounded-full border object-cover transition-colors ${isHome ? 'border-[#2d9ea0]/35 shadow-[0_4px_18px_rgba(16,20,26,0.1)] group-hover:border-[#2d9ea0]' : 'border-cyan/40 shadow-[0_0_22px_rgba(114,238,228,0.12)] group-hover:border-cyan'}`}
               />
-                 <div className="absolute inset-0 rounded-full ring-4 ring-cyan/10 transition-all group-hover:ring-cyan/25"></div>
+                <div className={`absolute inset-0 rounded-full ring-4 transition-all ${isHome ? 'ring-[#2d9ea0]/10 group-hover:ring-[#2d9ea0]/25' : 'ring-cyan/10 group-hover:ring-cyan/25'}`}></div>
             </div>
             <div className="flex flex-col">
-              <span className="font-display font-semibold text-sm tracking-wide text-paper">JJ Khoza Tech</span>
-              <span className="font-mono text-[10px] text-paper/60 uppercase tracking-widest group-hover:text-cyan/80 transition-colors">Digital Civilization Architecture</span>
+              <span className={`font-display font-semibold text-sm tracking-wide ${isHome ? 'text-[#10141a]' : 'text-paper'}`}>JJ Khoza Tech</span>
+              <span className={`font-mono text-[10px] uppercase tracking-widest transition-colors ${isHome ? 'text-[#65717e] group-hover:text-[#247f7c]' : 'text-paper/60 group-hover:text-cyan/80'}`}>Digital Civilization Architecture</span>
             </div>
           </Link>
 
@@ -220,7 +221,7 @@ export function Shell({ children }: { children: ReactNode }) {
               <Link 
                 key={link.href} 
                 href={link.href} 
-                 className={`rounded-full border px-3 py-2 font-mono text-[10px] uppercase tracking-[0.16em] transition-colors hover:border-cyan/40 hover:text-cyan ${location === link.href ? 'border-cyan/30 bg-cyan/[0.08] text-cyan' : 'border-transparent text-paper/65'}`}
+                 className={`rounded-full border px-3 py-2 font-mono text-[10px] uppercase tracking-[0.16em] transition-colors ${isHome ? 'hover:border-[#2d9ea0]/35 hover:text-[#247f7c]' : 'hover:border-cyan/40 hover:text-cyan'} ${location === link.href ? (isHome ? 'border-[#2d9ea0]/25 bg-[#2d9ea0]/[0.08] text-[#247f7c]' : 'border-cyan/30 bg-cyan/[0.08] text-cyan') : (isHome ? 'border-transparent text-[#475260]' : 'border-transparent text-paper/65')}`}
                 aria-current={location === link.href ? 'page' : undefined}
                 data-testid={`link-nav-${link.label.toLowerCase()}`}
               >
@@ -229,11 +230,7 @@ export function Shell({ children }: { children: ReactNode }) {
             ))}
             <Link 
               href="/contact" 
-               className={`flex items-center gap-2 rounded-sm px-4 py-2 font-mono text-[10px] uppercase tracking-[0.16em] shadow-[0_0_24px_rgba(114,238,228,0.16)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_32px_rgba(114,238,228,0.25)] ${
-                location === '/contact'
-                  ? 'text-ink bg-copper'
-                  : 'text-ink bg-cyan hover:bg-cyan/90'
-              }`}
+               className={`flex items-center gap-2 rounded-sm px-4 py-2 font-mono text-[10px] uppercase tracking-[0.16em] transition-all hover:-translate-y-0.5 ${isHome ? 'bg-gradient-to-r from-[#63d9cb] to-[#9b8af0] text-[#10141a] shadow-[0_8px_24px_rgba(85,134,168,0.18)] hover:shadow-[0_12px_30px_rgba(85,134,168,0.25)]' : `shadow-[0_0_24px_rgba(114,238,228,0.16)] hover:shadow-[0_0_32px_rgba(114,238,228,0.25)] ${location === '/contact' ? 'text-ink bg-copper' : 'text-ink bg-cyan hover:bg-cyan/90'}`}`}
               aria-current={location === '/contact' ? 'page' : undefined}
               data-testid="link-nav-contact"
             >
@@ -244,7 +241,7 @@ export function Shell({ children }: { children: ReactNode }) {
           {/* Mobile Toggle */}
           <button 
             ref={menuButtonRef}
-             className="rounded-full border border-white/10 p-2 text-paper/80 transition-colors hover:border-cyan/40 hover:text-cyan lg:hidden"
+             className={`rounded-full border p-2 transition-colors lg:hidden ${isHome ? 'border-[#10141a]/10 text-[#394653] hover:border-[#2d9ea0]/40 hover:text-[#247f7c]' : 'border-white/10 text-paper/80 hover:border-cyan/40 hover:text-cyan'}`}
             onClick={() => {
               restoreMenuFocusRef.current = true;
               setMenuOpen(!menuOpen);
@@ -266,14 +263,14 @@ export function Shell({ children }: { children: ReactNode }) {
             role="dialog"
             aria-modal="true"
             aria-label="Site navigation"
-             className="signal-panel absolute inset-x-0 top-20 h-[calc(100vh-80px)] overflow-y-auto border-x-0 border-t-0 p-6 shadow-2xl lg:hidden"
+             className={`absolute inset-x-0 top-20 h-[calc(100vh-80px)] overflow-y-auto border-x-0 border-t-0 p-6 shadow-2xl lg:hidden ${isHome ? 'border-[#dce2eb] bg-white/95 text-[#10141a] backdrop-blur-xl' : 'signal-panel'}`}
           >
             <nav aria-label="Mobile navigation" className="flex flex-col gap-6">
               {navLinks.map((link) => (
                 <Link 
                   key={link.href} 
                   href={link.href}
-                  className={`font-display text-3xl hover:text-cyan transition-colors ${location === link.href ? 'text-cyan' : 'text-paper'}`}
+                  className={`font-display text-3xl transition-colors ${isHome ? 'hover:text-[#247f7c]' : 'hover:text-cyan'} ${location === link.href ? (isHome ? 'text-[#247f7c]' : 'text-cyan') : (isHome ? 'text-[#10141a]' : 'text-paper')}`}
                   aria-current={location === link.href ? 'page' : undefined}
                   onClick={() => {
                     restoreMenuFocusRef.current = false;
@@ -286,7 +283,7 @@ export function Shell({ children }: { children: ReactNode }) {
               ))}
               <Link 
                 href="/contact" 
-                className="flex items-center gap-3 font-display text-3xl text-copper hover:text-copper/80 transition-colors mt-4 pt-4 border-t border-white/5"
+                className={`mt-4 flex items-center gap-3 border-t pt-4 font-display text-3xl transition-colors ${isHome ? 'border-[#10141a]/10 text-[#247f7c] hover:text-[#6555d5]' : 'border-white/5 text-copper hover:text-copper/80'}`}
                 aria-current={location === '/contact' ? 'page' : undefined}
                 onClick={() => {
                   restoreMenuFocusRef.current = false;

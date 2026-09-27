@@ -35,9 +35,12 @@ minimumReleaseAgeExclude:
   - stripe-replit-sync
 
 packages:
-  - artifacts/*
-  - lib/*
-  - lib/integrations/*
+  - artifacts/api-server
+  - artifacts/jj-khoza-tech
+  - artifacts/mockup-sandbox
+  - lib/api-client-react
+  - lib/api-spec
+  - lib/api-zod
   - scripts
 
 catalog:
@@ -67,6 +70,7 @@ catalog:
   zod: ^3.25.76
 
 autoInstallPeers: false
+linkWorkspacePackages: true
 
 overrides:
   # replit uses linux-x64 only, we can exclude all other platforms
